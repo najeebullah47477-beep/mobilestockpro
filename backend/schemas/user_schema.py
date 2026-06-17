@@ -9,7 +9,7 @@ class UserSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_relationships = True
 
-    password = fields.String(write_only=True, validate=validate.Length(min=6))
+    password = fields.String(load_only=True, validate=validate.Length(min=6))
 
 
 class RegisterSchema(Schema):
