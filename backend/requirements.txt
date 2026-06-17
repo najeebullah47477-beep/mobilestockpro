@@ -13,3 +13,4 @@ reportlab
 openpyxl
 gunicorn
 psycopg[binary]
+python-dateutil
