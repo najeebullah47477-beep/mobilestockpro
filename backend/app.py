@@ -48,22 +48,25 @@ def create_app():
                     db.session.add(notif)
             db.session.commit()
 
-    scheduler.add_job(
-        func=check_low_stock,
-        trigger="interval",
-        hours=1,
-        id="low_stock_check",
-        name="Check low stock every hour"
-    )
-    scheduler.start()
+    # Scheduler ko double initialization se bachane ke liye safe check
+    if not scheduler.running:
+        scheduler.add_job(
+            func=check_low_stock,
+            trigger="interval",
+            hours=1,
+            id="low_stock_check",
+            name="Check low stock every hour",
+            replace_existing=True
+        )
+        scheduler.start()
 
     return app
 
 
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True, port=5000)
-    app = create_app()
+# --- RAILWAY / GUNICORN FIX ---
+# Ye global instance Gunicorn ko direct mil jayega jab wo 'app:app' run karega
+app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Jab aap VS Code me locally chalayein ge, tu ye port 5000 pe run hoga
+    app.run(debug=True, port=5000)
