@@ -7,6 +7,7 @@ import DataTable from '../components/DataTable'
 import SearchFilter from '../components/SearchFilter'
 import Pagination from '../components/Pagination'
 import Modal from '../components/Modal'
+import BarcodeScanner from '../components/BarcodeScanner'
 import ConfirmDialog from '../components/ConfirmDialog'
 import PermissionGuard from '../components/PermissionGuard'
 import api from '../api/axios'
@@ -62,6 +63,7 @@ export default function Sales() {
   const [itemsRequiredError, setItemsRequiredError] = useState('')
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [amountPaidWarning, setAmountPaidWarning] = useState('')
+  const [scannerOpenFor, setScannerOpenFor] = useState(null)
 
   const fetchSales = async (p = 1) => {
     setLoading(true)
@@ -132,6 +134,24 @@ export default function Sales() {
     } catch {
       setProducts([])
     }
+  }
+
+  const handleScan = async (scannedValue, itemId) => {
+    try {
+      const res = await api.get('/products', { params: { search: scannedValue, per_page: 5 } })
+      if (res.data.success && res.data.data.products.length > 0) {
+        const found = res.data.data.products.find(
+          (p) => p.imei === scannedValue || p.sku === scannedValue
+        ) || res.data.data.products[0]
+        selectProduct(itemId, found)
+        toast.success(`Product found: ${found.name}`)
+      } else {
+        toast.error(`Product not found for scanned code: ${scannedValue}`)
+      }
+    } catch {
+      toast.error(`Product not found for scanned code: ${scannedValue}`)
+    }
+    setScannerOpenFor(null)
   }
 
   useEffect(() => {
@@ -791,20 +811,32 @@ export default function Sales() {
                 <div key={item.id} className="flex flex-wrap items-end gap-3 mb-3 p-3 bg-gray-50 rounded-lg">
                   <div className="flex-1 min-w-[200px] relative">
                     <label className="text-xs text-gray-500 mb-1 block">Product</label>
-                    <input
-                      type="text"
-                      value={openProductIdx === idx ? productSearch : item.product_name}
-                      onChange={(e) => {
-                        setOpenProductIdx(idx)
-                        setProductSearch(e.target.value)
-                      }}
-                      onFocus={() => {
-                        setOpenProductIdx(idx)
-                        setProductSearch('')
-                      }}
-                      placeholder="Search product..."
-                      className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 outline-none transition ${getItemFieldClass('product')}`}
-                    />
+                    <div className="flex gap-1">
+                      <input
+                        type="text"
+                        value={openProductIdx === idx ? productSearch : item.product_name}
+                        onChange={(e) => {
+                          setOpenProductIdx(idx)
+                          setProductSearch(e.target.value)
+                        }}
+                        onFocus={() => {
+                          setOpenProductIdx(idx)
+                          setProductSearch('')
+                        }}
+                        placeholder="Search product..."
+                        className={`flex-1 px-3 py-2 border rounded-lg text-sm focus:ring-2 outline-none transition ${getItemFieldClass('product')}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setScannerOpenFor(item.id)}
+                        className="px-2 py-2 border border-gray-300 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                        title="Scan barcode / QR / IMEI"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                        </svg>
+                      </button>
+                    </div>
                     {errs.product && t.product && (
                       <p className="text-red-500 text-xs mt-1">{errs.product}</p>
                     )}
@@ -1045,6 +1077,12 @@ export default function Sales() {
           </div>
         </form>
       </Modal>
+
+      <BarcodeScanner
+        isOpen={scannerOpenFor !== null}
+        onClose={() => setScannerOpenFor(null)}
+        onScanSuccess={(value) => handleScan(value, scannerOpenFor)}
+      />
 
       <ConfirmDialog
         isOpen={deleteConfirm.open}
