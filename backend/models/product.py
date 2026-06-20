@@ -14,7 +14,7 @@ class Product(db.Model):
     sku = db.Column(db.String(100), unique=True, nullable=False)
     imei = db.Column(db.String(50), unique=True, nullable=True)
     barcode = db.Column(db.String(100))
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=True)
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'), nullable=True)
     supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'), nullable=True)
     color = db.Column(db.String(50))

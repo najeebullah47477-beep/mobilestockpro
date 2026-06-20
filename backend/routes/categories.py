@@ -100,12 +100,12 @@ def delete_category(id):
         if not category:
             return jsonify({'success': False, 'data': None, 'message': 'Category not found'}), 404
 
-        product_count = category.products.count()
-        if product_count > 0:
-            return jsonify({'success': False, 'data': None, 'message': f'Cannot delete category: {product_count} product(s) are assigned to this category. Reassign or delete them first.'}), 409
+        from models.product import Product
 
         current_user_id = int(get_jwt_identity())
         user = User.query.get(current_user_id)
+
+        Product.query.filter_by(category_id=id).update({"category_id": None})
 
         log_delete(
             module='Categories',
@@ -123,4 +123,6 @@ def delete_category(id):
         return jsonify({'success': True, 'data': None, 'message': 'Category deleted successfully'}), 200
     except Exception as e:
         db.session.rollback()
+        import traceback
+        traceback.print_exc()
         return jsonify({'success': False, 'data': None, 'message': str(e)}), 500
