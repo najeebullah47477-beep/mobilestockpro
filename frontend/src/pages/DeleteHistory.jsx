@@ -298,7 +298,7 @@ export default function DeleteHistory() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
             <svg className="w-7 h-7 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
@@ -320,8 +320,8 @@ export default function DeleteHistory() {
       )}
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-        <div className="flex flex-wrap items-end gap-3">
-          <div className="flex-1 min-w-[200px]">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-end gap-2 sm:gap-3">
+          <div className="w-full sm:flex-1 sm:min-w-[200px]">
             <label className="block text-xs font-medium text-gray-500 mb-1">Search</label>
             <input
               type="text"
@@ -331,7 +331,7 @@ export default function DeleteHistory() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
             />
           </div>
-          <div className="w-40">
+          <div className="w-full sm:w-40">
             <label className="block text-xs font-medium text-gray-500 mb-1">Module</label>
             <select
               value={filters.module}
@@ -343,7 +343,7 @@ export default function DeleteHistory() {
               ))}
             </select>
           </div>
-          <div className="w-40">
+          <div className="w-full sm:w-40">
             <label className="block text-xs font-medium text-gray-500 mb-1">Start Date</label>
             <input
               type="date"
@@ -352,7 +352,7 @@ export default function DeleteHistory() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
           </div>
-          <div className="w-40">
+          <div className="w-full sm:w-40">
             <label className="block text-xs font-medium text-gray-500 mb-1">End Date</label>
             <input
               type="date"
@@ -361,7 +361,7 @@ export default function DeleteHistory() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
           </div>
-          <div className="w-40">
+          <div className="w-full sm:w-40">
             <label className="block text-xs font-medium text-gray-500 mb-1">Status</label>
             <select
               value={filters.status}
@@ -383,14 +383,14 @@ export default function DeleteHistory() {
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+        <div className="p-4 border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <p className="text-sm text-gray-600">
             {totalItems > 0 ? `${totalItems} record(s) found` : ''}
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => setClearConfirm({ open: true, module: null })}
-              className="px-3 py-1.5 text-sm font-medium rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors"
+              className="w-full sm:w-auto px-3 py-1.5 text-sm font-medium rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors"
             >
               Clear All History
             </button>
@@ -402,7 +402,7 @@ export default function DeleteHistory() {
                   e.target.value = ''
                 }
               }}
-              className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full sm:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="">Clear by Module</option>
               {MODULES.filter(m => m.value).map(m => (

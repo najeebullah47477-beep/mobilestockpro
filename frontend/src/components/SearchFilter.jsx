@@ -27,8 +27,8 @@ export default function SearchFilter({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <div className="relative flex-1 min-w-[200px] max-w-md">
+    <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3">
+      <div className="relative w-full sm:flex-1 sm:min-w-[200px] sm:max-w-md">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-lg">
           🔍
         </span>

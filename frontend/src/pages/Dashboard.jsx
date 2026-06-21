@@ -101,7 +101,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+      <h1 className="text-xl md:text-2xl font-bold text-gray-900">Dashboard</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <StatCard
@@ -149,9 +149,9 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Sales Last 7 Days</h2>
-          <ResponsiveContainer width="100%" height={300}>
+        <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
+          <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Sales Last 7 Days</h2>
+          <ResponsiveContainer width="100%" height={280}>
             <LineChart data={stats?.sales_last_7_days ?? []}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="date" tickFormatter={(val) => dayjs(val).format('DD MMM')} stroke="#9ca3af" fontSize={12} />
@@ -166,13 +166,13 @@ export default function Dashboard() {
         </div>
 
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Sales</h2>
+          <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Recent Sales</h2>
           <DataTable columns={salesColumns} data={recentSales.slice(0, 5)} emptyMessage="No recent sales" />
         </div>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Low Stock Products</h2>
+        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Low Stock Products</h2>
         <DataTable columns={lowStockColumns} data={lowStockProducts} emptyMessage="No low stock products" />
       </div>
     </div>

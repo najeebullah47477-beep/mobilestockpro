@@ -26,7 +26,7 @@ export default function Navbar({ onMenuClick }) {
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
-          className="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none"
+          className="md:hidden p-2.5 rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none min-w-[44px] min-h-[44px] flex items-center justify-center"
           aria-label="Toggle sidebar"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ export default function Navbar({ onMenuClick }) {
         {/* Notification bell */}
         <button
           onClick={() => navigate('/notifications')}
-          className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none"
+          className="relative p-2.5 rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Notifications"
         >
           <span className="text-xl">🔔</span>
@@ -75,7 +75,7 @@ export default function Navbar({ onMenuClick }) {
         {/* Logout */}
         <button
           onClick={handleLogout}
-          className="ml-1 p-2 rounded-lg text-gray-400 hover:text-danger-600 hover:bg-danger-50 focus:outline-none transition-colors duration-150"
+          className="ml-1 p-2.5 rounded-lg text-gray-400 hover:text-danger-600 hover:bg-danger-50 focus:outline-none transition-colors duration-150 min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Logout"
           title="Logout"
         >

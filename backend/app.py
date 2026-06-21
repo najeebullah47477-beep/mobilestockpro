@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from config import Config
 from extensions import db, migrate, jwt, cors, scheduler
 from routes import register_blueprints
@@ -12,7 +12,24 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
-    cors.init_app(app)
+
+    cors.init_app(
+        app,
+        resources={r"/api/*": {"origins": Config.CORS_ORIGINS}},
+        supports_credentials=True,
+    )
+
+    @app.after_request
+    def add_cors_headers(response):
+        origin = request.headers.get('Origin')
+        if origin and origin in Config.CORS_ORIGINS:
+            response.headers['Access-Control-Allow-Origin'] = origin
+            response.headers['Access-Control-Allow-Credentials'] = 'true'
+            response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
+        if request.method == 'OPTIONS':
+            response.status_code = 200
+        return response
 
     register_blueprints(app)
 

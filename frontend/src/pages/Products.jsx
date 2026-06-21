@@ -442,8 +442,8 @@ export default function Products() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">Products</h1>
-        <div className="flex gap-3">
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Products</h1>
+        <div className="flex gap-2 sm:gap-3 flex-wrap">
           <PermissionGuard roles={['admin', 'manager']}>
             <button
               onClick={handleExport}
@@ -570,36 +570,38 @@ export default function Products() {
                 error={errors.imei?.message}
                 touched={touchedFields.imei || isSubmitted}
               >
-                <div className="flex gap-2">
-                  <input
-                    name={imeiReg.name}
-                    ref={imeiReg.ref}
-                    maxLength={15}
-                    placeholder="Enter 15-digit IMEI"
-                    onBlur={(e) => {
-                      const val = e.target.value
-                      if (val && val.length === 15 && /^[0-9]{15}$/.test(val)) {
-                        checkAvailability('/products/check-imei', { imei: val, exclude_id: editingProduct?.id }, 'imei')
-                      }
-                      imeiReg.onBlur(e)
-                    }}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 15)
-                      setValue('imei', val, { shouldValidate: true, shouldDirty: true })
-                      setImeiLuhnResult(null)
-                    }}
-                    className={`flex-1 ${inputBase} ${errors.imei && (touchedFields.imei || isSubmitted) ? 'border-red-400' : 'border-gray-300'}`}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setScannerOpen(true)}
-                    className="px-2.5 py-2.5 border border-gray-300 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
-                    title="Scan IMEI barcode / QR"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-                    </svg>
-                  </button>
+                <div className="flex flex-wrap gap-2">
+                  <div className="flex-1 min-w-[140px] flex gap-2">
+                    <input
+                      name={imeiReg.name}
+                      ref={imeiReg.ref}
+                      maxLength={15}
+                      placeholder="Enter 15-digit IMEI"
+                      onBlur={(e) => {
+                        const val = e.target.value
+                        if (val && val.length === 15 && /^[0-9]{15}$/.test(val)) {
+                          checkAvailability('/products/check-imei', { imei: val, exclude_id: editingProduct?.id }, 'imei')
+                        }
+                        imeiReg.onBlur(e)
+                      }}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 15)
+                        setValue('imei', val, { shouldValidate: true, shouldDirty: true })
+                        setImeiLuhnResult(null)
+                      }}
+                      className={`flex-1 min-w-0 ${inputBase} ${errors.imei && (touchedFields.imei || isSubmitted) ? 'border-red-400' : 'border-gray-300'}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setScannerOpen(true)}
+                      className="px-2.5 py-2.5 border border-gray-300 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      title="Scan IMEI barcode / QR"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                      </svg>
+                    </button>
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
@@ -608,7 +610,7 @@ export default function Products() {
                         setImeiLuhnResult(luhnCheck(val))
                       }
                     }}
-                    className="px-3 py-2.5 text-xs font-medium border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors"
+                    className="px-3 py-2.5 text-xs font-medium border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors min-h-[44px]"
                     disabled={!watchImei || watchImei.length !== 15}
                   >
                     Verify IMEI
@@ -914,18 +916,18 @@ export default function Products() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-4 border-t border-gray-200">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-150"
+              className="w-full sm:w-auto px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-150"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting || Object.keys(errors).length > 0}
-              className="px-4 py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-medium rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-150"
+              className="w-full sm:w-auto px-4 py-2.5 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-medium rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-150"
             >
               {submitting ? 'Saving...' : editingProduct ? 'Update Product' : 'Add Product'}
             </button>

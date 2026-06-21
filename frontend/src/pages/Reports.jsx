@@ -156,7 +156,7 @@ export default function Reports() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Reports</h1>
       </div>
 
       <div className="border-b border-gray-200">
@@ -177,25 +177,25 @@ export default function Reports() {
         </nav>
       </div>
 
-      <div className="flex flex-wrap items-end gap-3">
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-end gap-2 sm:gap-3">
         {requiresDateRange && (
           <>
-            <div>
+            <div className="w-full sm:w-auto">
               <label className="block text-xs font-medium text-gray-500 mb-1">Start Date</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
-            <div>
+            <div className="w-full sm:w-auto">
               <label className="block text-xs font-medium text-gray-500 mb-1">End Date</label>
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
           </>
@@ -274,9 +274,9 @@ export default function Reports() {
             <StatCard title="Profit" value={currencyFormat(salesSummary.profit)} icon="📈" color="green" />
             <StatCard title="Items Sold" value={numberFormat(salesSummary.items_sold)} icon="📦" color="blue" />
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue vs Profit vs Discount</h2>
-            <ResponsiveContainer width="100%" height={350}>
+          <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
+            <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Revenue vs Profit vs Discount</h2>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={salesSummary.chart_data || []}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="date" stroke="#9ca3af" fontSize={12} />
@@ -310,9 +310,9 @@ export default function Reports() {
             <StatCard title="Expenses" value={currencyFormat(profitLoss.expenses)} icon="💸" color="yellow" />
             <StatCard title="Net Profit" value={currencyFormat(profitLoss.net_profit)} icon="📊" color={profitLoss.net_profit >= 0 ? 'green' : 'red'} />
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenue, Expenses & Net Profit Trend</h2>
-            <ResponsiveContainer width="100%" height={350}>
+          <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
+            <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Revenue, Expenses & Net Profit Trend</h2>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={profitLoss.chart_data || []}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="date" stroke="#9ca3af" fontSize={12} />
@@ -330,8 +330,8 @@ export default function Reports() {
 
       {!loading && activeTab === 'top_products' && topProducts.length > 0 && (
         <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Top Products by Revenue</h2>
+          <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-5">
+            <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4">Top Products by Revenue</h2>
             <ResponsiveContainer width="100%" height={Math.max(300, topProducts.length * 50)}>
               <BarChart data={topProducts} layout="vertical" margin={{ left: 120, right: 20, top: 10, bottom: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

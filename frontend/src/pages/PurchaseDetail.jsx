@@ -91,16 +91,16 @@ export default function PurchaseDetail() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-8 print:p-4 print:border-0 print:rounded-none print:shadow-none invoice-content">
-        <div className="flex justify-between items-start border-b border-gray-300 pb-6 mb-6 print:pb-4 print:mb-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-8 print:p-4 print:border-0 print:rounded-none print:shadow-none invoice-content">
+        <div className="flex flex-col sm:flex-row justify-between items-start border-b border-gray-300 pb-4 sm:pb-6 mb-4 sm:mb-6 print:pb-4 print:mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">MobileStock Pro</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">MobileStock Pro</h1>
             <p className="text-sm text-gray-500">123 Main Street, Block A</p>
             <p className="text-sm text-gray-500">Lahore, Pakistan</p>
             <p className="text-sm text-gray-500">Phone: +92-300-1234567</p>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-bold text-gray-800 uppercase tracking-wide">Purchase Invoice</h2>
+            <h2 className="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-wide">Purchase Invoice</h2>
             <p className="text-sm text-gray-500 mt-1">Invoice #: {purchase.invoice_no || purchase.invoice_number || '-'}</p>
             <p className="text-sm text-gray-500">
               Date: {purchase.purchase_date ? dayjs(purchase.purchase_date).format('DD MMM YYYY') : '-'}
@@ -108,20 +108,22 @@ export default function PurchaseDetail() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Supplier</h3>
             <p className="text-sm font-medium text-gray-900">{purchase.supplier_name || purchase.supplier?.name || '-'}</p>
             {purchase.supplier_phone && <p className="text-sm text-gray-600">{purchase.supplier_phone}</p>}
             {purchase.supplier_address && <p className="text-sm text-gray-600">{purchase.supplier_address}</p>}
           </div>
-          <div className="text-right">
+          <div className="sm:text-right">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Purchase Details</h3>
             {purchase.purchase_person && <p className="text-sm text-gray-600">Purchased by: {purchase.purchase_person}</p>}
           </div>
         </div>
 
-        <table className="w-full border-collapse mb-6">
+        <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
+          <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+        <table className="w-full border-collapse">
           <thead>
             <tr className="border-y border-gray-300">
               <th className="py-2.5 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
@@ -154,9 +156,11 @@ export default function PurchaseDetail() {
             )}
           </tbody>
         </table>
+          </div>
+        </div>
 
         <div className="flex justify-end mb-6">
-          <div className="w-72 space-y-2">
+          <div className="w-full sm:w-72 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-gray-500">Subtotal:</span>
               <span className="text-gray-900">{currencyFormat(subtotal)}</span>

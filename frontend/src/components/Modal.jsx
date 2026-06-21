@@ -29,19 +29,19 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4">
       <div
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-200"
         onClick={onClose}
       />
       <div
-        className={`relative w-full ${sizeClasses[size] || sizeClasses.md} bg-white rounded-xl shadow-2xl transform transition-all duration-200 opacity-100 scale-100`}
+        className={`relative w-full ${sizeClasses[size] || sizeClasses.md} bg-white rounded-xl shadow-2xl transform transition-all duration-200 opacity-100 scale-100 max-h-[90vh] flex flex-col`}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+        <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 border-b border-gray-200 flex-shrink-0 min-h-[56px]">
+          <h2 className="text-base md:text-lg font-semibold text-gray-900 pr-2">{title}</h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none transition-colors duration-150"
+            className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none transition-colors duration-150 flex-shrink-0"
             aria-label="Close"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
             </svg>
           </button>
         </div>
-        <div className="px-6 py-4">{children}</div>
+        <div className="px-4 md:px-6 py-4 overflow-y-auto">{children}</div>
       </div>
     </div>
   )

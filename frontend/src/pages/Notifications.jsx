@@ -93,7 +93,7 @@ export default function Notifications() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">Notifications</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Notifications</h1>
         {unreadNotifications > 0 && (
           <button
             onClick={handleMarkAllRead}

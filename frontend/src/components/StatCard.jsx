@@ -25,13 +25,13 @@ export default function StatCard({ title, value, subtitle, icon, color = 'blue',
   const styles = colorMap[color] || colorMap.blue
 
   return (
-    <div className={`bg-white rounded-xl shadow-sm border border-gray-200 border-l-4 ${styles.border} p-5`}>
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-500">{title}</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+    <div className={`bg-white rounded-xl shadow-sm border border-gray-200 border-l-4 ${styles.border} p-4 md:p-5`}>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="text-xs md:text-sm font-medium text-gray-500 truncate">{title}</p>
+          <p className="text-lg md:text-2xl font-bold text-gray-900 mt-0.5 md:mt-1 truncate">{value}</p>
           {subtitle && (
-            <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
+            <p className="text-xs text-gray-400 mt-1 truncate">{subtitle}</p>
           )}
           {trend && (
             <div className="flex items-center gap-1 mt-2">

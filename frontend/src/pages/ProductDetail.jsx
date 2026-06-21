@@ -180,7 +180,7 @@ export default function ProductDetail() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7-7l-7 7 7 7" />
             </svg>
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-900">{product.name}</h1>
         </div>
         <button
           onClick={() => navigate('/products')}
@@ -190,8 +190,8 @@ export default function ProductDetail() {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Product Information</h2>
+      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Product Information</h2>
         {product.image_url && (
           <div className="mb-4">
             <img
@@ -215,8 +215,8 @@ export default function ProductDetail() {
       </div>
 
         {isDevice && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Device Specifications</h2>
+          <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+            <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Device Specifications</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="border-b border-gray-100 pb-2">
                 <span className="text-xs text-gray-500 uppercase tracking-wider">IMEI</span>
@@ -234,8 +234,8 @@ export default function ProductDetail() {
           </div>
         )}
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Stock Movement</h2>
+        <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Stock Movement</h2>
         <DataTable
           columns={stockMovementColumns}
           data={stockMovements}
@@ -243,8 +243,8 @@ export default function ProductDetail() {
         />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Warranties</h2>
+      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Warranties</h2>
         <DataTable
           columns={warrantyColumns}
           data={warranties}

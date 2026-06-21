@@ -9,14 +9,9 @@ const Layout = () => {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="flex flex-col flex-1 min-w-0">
         <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-        <main style={{
-          flex: 1,
-          padding: '24px',
-          backgroundColor: '#f3f4f6',
-          overflowY: 'auto'
-        }}>
+        <main className="flex-1 p-4 md:p-6 bg-gray-100 overflow-y-auto">
           <Outlet />
         </main>
       </div>

@@ -9,20 +9,20 @@ export default function DataTable({ columns = [], data = [], loading = false, em
           <thead className="bg-gray-50">
             <tr>
               {columns.map((col) => (
-                <th
-                  key={col.key}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  {col.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {Array.from({ length: 3 }).map((_, rowIdx) => (
-              <tr key={rowIdx}>
-                {columns.map((col) => (
-                  <td key={col.key} className="px-6 py-4 whitespace-nowrap">
+                  <th
+                    key={col.key}
+                    className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    {col.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {Array.from({ length: 3 }).map((_, rowIdx) => (
+                <tr key={rowIdx}>
+                  {columns.map((col) => (
+                    <td key={col.key} className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                     <Skeleton />
                   </td>
                 ))}
@@ -42,17 +42,17 @@ export default function DataTable({ columns = [], data = [], loading = false, em
             <tr>
               {columns.map((col) => (
                 <th
-                  key={col.key}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  {col.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colSpan={columns.length} className="px-6 py-12 text-center text-gray-500">
+                    key={col.key}
+                    className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    {col.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan={columns.length} className="px-4 md:px-6 py-8 md:py-12 text-center text-gray-500">
                 {emptyMessage}
               </td>
             </tr>
@@ -68,20 +68,20 @@ export default function DataTable({ columns = [], data = [], loading = false, em
         <thead className="bg-gray-50">
           <tr>
             {columns.map((col) => (
-              <th
-                key={col.key}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                {col.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200">
-          {data.map((row, rowIdx) => (
-            <tr key={row.id || rowIdx} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-              {columns.map((col) => (
-                <td key={col.key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <th
+                  key={col.key}
+                  className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  {col.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {data.map((row, rowIdx) => (
+              <tr key={row.id || rowIdx} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                {columns.map((col) => (
+                  <td key={col.key} className="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm text-gray-700">
                   {col.render ? col.render(row[col.key], row) : row[col.key]}
                 </td>
               ))}

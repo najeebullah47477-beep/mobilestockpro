@@ -91,16 +91,16 @@ export default function SaleDetail() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-8 print:p-4 print:border-0 print:rounded-none print:shadow-none invoice-content">
-        <div className="flex justify-between items-start border-b border-gray-300 pb-6 mb-6 print:pb-4 print:mb-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-8 print:p-4 print:border-0 print:rounded-none print:shadow-none invoice-content">
+        <div className="flex flex-col sm:flex-row justify-between items-start border-b border-gray-300 pb-4 sm:pb-6 mb-4 sm:mb-6 print:pb-4 print:mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">MobileStock Pro</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">MobileStock Pro</h1>
             <p className="text-sm text-gray-500">123 Main Street, Block A</p>
             <p className="text-sm text-gray-500">Lahore, Pakistan</p>
             <p className="text-sm text-gray-500">Phone: +92-300-1234567</p>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-bold text-gray-800 uppercase tracking-wide">Sale Invoice</h2>
+            <h2 className="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-wide">Sale Invoice</h2>
             <p className="text-sm text-gray-500 mt-1">Invoice #: {sale.invoice_no || sale.invoice_number || '-'}</p>
             <p className="text-sm text-gray-500">
               Date: {sale.sale_date ? dayjs(sale.sale_date).format('DD MMM YYYY') : '-'}
@@ -108,14 +108,14 @@ export default function SaleDetail() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Bill To</h3>
             <p className="text-sm font-medium text-gray-900">{sale.customer_name || sale.customer?.name || 'Walk-in Customer'}</p>
             {sale.customer_phone && <p className="text-sm text-gray-600">{sale.customer_phone}</p>}
             {sale.customer_address && <p className="text-sm text-gray-600">{sale.customer_address}</p>}
           </div>
-          <div className="text-right">
+          <div className="sm:text-right">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Sale Details</h3>
             <p className="text-sm text-gray-600">
               Sale Type: <span className="font-medium uppercase">{sale.sale_type || 'Retail'}</span>
@@ -124,7 +124,9 @@ export default function SaleDetail() {
           </div>
         </div>
 
-        <table className="w-full border-collapse mb-6">
+        <div className="overflow-x-auto -mx-4 sm:mx-0 mb-6">
+          <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+        <table className="w-full border-collapse">
           <thead>
             <tr className="border-y border-gray-300">
               <th className="py-2.5 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
@@ -159,8 +161,10 @@ export default function SaleDetail() {
             )}
           </tbody>
         </table>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <div>
             {items.some((i) => i.warranty_months) && (
               <div>

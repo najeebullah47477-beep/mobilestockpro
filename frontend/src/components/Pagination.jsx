@@ -30,7 +30,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
   }
 
   const baseBtn =
-    'px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary-500'
+    'px-2.5 md:px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary-500'
   const activeBtn = 'bg-primary-600 text-white'
   const inactiveBtn = 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
   const disabledBtn = 'text-gray-400 bg-gray-100 border border-gray-200 cursor-not-allowed'
@@ -38,8 +38,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
   const pageNumbers = getPageNumbers()
 
   return (
-    <div className="flex items-center justify-between gap-4 mt-4">
-      <p className="text-sm text-gray-600">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 mt-4">
+      <p className="text-xs sm:text-sm text-gray-600">
         Page {currentPage} of {totalPages}
       </p>
       <nav className="flex items-center gap-1.5">
